@@ -1,6 +1,8 @@
 var taskInputElement = document.querySelector("#taskName");
 var addTaskButtonElement = document.querySelector(".addTask");
 var tasksContainer = document.querySelector(".tasks");
+var categoriesContainer = document.querySelector(".categories");
+var categories = ["general", "work", "gym", "hobby"];
 var tasks = [
     {
         name: "Wyjść z psem na spacer",
@@ -19,12 +21,27 @@ var tasks = [
         done: false,
     },
 ];
-// const tasks: string[] = [
-//   "Wyjść z psem na spacer",
-//   "Zrobić trening",
-//   "Nauczyć się TS",
-//   "Znaleźć pracę",
-// ];
+var renderCategories = function () {
+    //   <li>
+    //   <input type="text" name="category" value="general"
+    //     id="category-general">
+    // </li>
+    categories.forEach(function (category) {
+        var categoryElement = document.createElement("li");
+        var categoryId = "category-".concat(category);
+        var categoryRadioElement = document.createElement("input");
+        categoryRadioElement.type = "radio";
+        categoryRadioElement.name = category;
+        categoryRadioElement.value = category;
+        categoryRadioElement.id = categoryId;
+        var categoryLabelElement = document.createElement("label");
+        categoryLabelElement.setAttribute("for", "category-".concat(category));
+        categoryLabelElement.innerText = category;
+        categoryElement.appendChild(categoryRadioElement);
+        categoryElement.appendChild(categoryLabelElement);
+        categoriesContainer.appendChild(categoryElement);
+    });
+};
 var renderTasks = function () {
     tasksContainer.innerText = "";
     tasks.forEach(function (task, index) {
@@ -55,4 +72,5 @@ addTaskButtonElement.addEventListener("click", function (event) {
     renderTasks();
 });
 addTask({ name: "asasdasdasd", done: true });
+renderCategories();
 renderTasks();
