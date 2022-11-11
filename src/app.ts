@@ -11,6 +11,7 @@ const tasks: string[] = [
 ];
 
 const renderTasks = () => {
+  tasksContainer.innerText = "";
   tasks.forEach((task, index) => {
     const taskElement = document.createElement("li");
     const taskId = `task-${index}`;
@@ -29,5 +30,16 @@ const renderTasks = () => {
     tasksContainer.appendChild(taskElement);
   });
 };
+
+const addTask = (task: string) => {
+  tasks.push(task);
+};
+
+addTaskButtonElement.addEventListener("click", (event: Event) => {
+  event.preventDefault();
+
+  addTask(taskInputElement.value);
+  renderTasks();
+});
 
 renderTasks();
