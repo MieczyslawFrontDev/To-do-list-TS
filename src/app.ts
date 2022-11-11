@@ -8,37 +8,39 @@ const categoriesContainer: HTMLUListElement =
 interface Task {
   name: string;
   done: boolean;
+  category?: Category;
 }
 
-type Categories = "general" | "work" | "gym" | "hobby";
+type Category = "general" | "work" | "gym" | "hobby";
 
-const categories: Categories[] = ["general", "work", "gym", "hobby"];
+const categories: Category[] = ["general", "work", "gym", "hobby"];
+
+let selectedCategory: Category;
 
 const tasks: Task[] = [
   {
     name: "Wyjść z psem na spacer",
     done: false,
+    category: "general",
   },
   {
     name: "Zrobić trening",
     done: false,
+    category: "gym",
   },
   {
     name: "Nauczyć się TS",
     done: false,
+    category: "hobby",
   },
   {
     name: "Znaleźć pracę",
     done: false,
+    category: "work",
   },
 ];
 
 const renderCategories = () => {
-  //   <li>
-  //   <input type="text" name="category" value="general"
-  //     id="category-general">
-  // </li>
-
   categories.forEach((category) => {
     const categoryElement: HTMLLIElement = document.createElement("li");
     const categoryId = `category-${category}`;
@@ -46,9 +48,13 @@ const renderCategories = () => {
     const categoryRadioElement: HTMLInputElement =
       document.createElement("input");
     categoryRadioElement.type = "radio";
-    categoryRadioElement.name = category;
+    categoryRadioElement.name = "category";
     categoryRadioElement.value = category;
     categoryRadioElement.id = categoryId;
+
+    categoryRadioElement.addEventListener("change", () => {
+      selectedCategory = category;
+    });
 
     const categoryLabelElement: HTMLLabelElement =
       document.createElement("label");
@@ -65,14 +71,17 @@ const renderTasks = () => {
   tasksContainer.innerText = "";
   tasks.forEach((task, index) => {
     const taskElement = document.createElement("li");
+    if (task.category) {
+      taskElement.classList.add(task.category);
+    }
     const taskId = `task-${index}`;
 
-    const taskInputElement = document.createElement("input");
-    taskInputElement.type = "checkbox";
-    taskInputElement.name = task.name;
-    taskInputElement.id = taskId;
-    taskInputElement.checked = task.done;
-    taskInputElement.addEventListener("click", () => {
+    const taskCheckboxElement = document.createElement("input");
+    taskCheckboxElement.type = "checkbox";
+    taskCheckboxElement.name = task.name;
+    taskCheckboxElement.id = taskId;
+    taskCheckboxElement.checked = task.done;
+    taskCheckboxElement.addEventListener("click", () => {
       task.done = !task.done;
     });
 
@@ -80,7 +89,7 @@ const renderTasks = () => {
     taskLabelElement.setAttribute("for", taskId);
     taskLabelElement.innerText = task.name;
 
-    taskElement.appendChild(taskInputElement);
+    taskElement.appendChild(taskCheckboxElement);
     taskElement.appendChild(taskLabelElement);
     tasksContainer.appendChild(taskElement);
   });
@@ -93,11 +102,15 @@ const addTask = (task: Task) => {
 addTaskButtonElement.addEventListener("click", (event: Event) => {
   event.preventDefault();
 
-  addTask({ name: taskInputElement.value, done: false });
+  addTask({
+    name: taskInputElement.value,
+    done: false,
+    category: selectedCategory,
+  });
   renderTasks();
 });
 
-addTask({ name: "asasdasdasd", done: true });
+addTask({ name: "asasdasdasd", done: true, category: "general" });
 
 renderCategories();
 renderTasks();
