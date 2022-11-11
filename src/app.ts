@@ -3,10 +3,12 @@ const addTaskButtonElement: HTMLButtonElement =
   document.querySelector(".addTask");
 const tasksContainer: HTMLUListElement = document.querySelector(".tasks");
 
-const tasks: {
+interface Task {
   name: string;
   done: boolean;
-}[] = [
+}
+
+const tasks: Task[] = [
   {
     name: "Wyjść z psem na spacer",
     done: false,
@@ -42,6 +44,10 @@ const renderTasks = () => {
     taskInputElement.type = "checkbox";
     taskInputElement.name = task.name;
     taskInputElement.id = taskId;
+    taskInputElement.checked = task.done;
+    taskInputElement.addEventListener("click", () => {
+      task.done = !task.done;
+    });
 
     const taskLabelElement = document.createElement("label");
     taskLabelElement.setAttribute("for", taskId);
@@ -53,15 +59,17 @@ const renderTasks = () => {
   });
 };
 
-const addTask = (taskName: string) => {
-  tasks.push({ name: taskName, done: false });
+const addTask = (task: Task) => {
+  tasks.push(task);
 };
 
 addTaskButtonElement.addEventListener("click", (event: Event) => {
   event.preventDefault();
 
-  addTask(taskInputElement.value);
+  addTask({ name: taskInputElement.value, done: false });
   renderTasks();
 });
+
+addTask({ name: "asasdasdasd", done: true });
 
 renderTasks();

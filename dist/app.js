@@ -34,6 +34,10 @@ var renderTasks = function () {
         taskInputElement.type = "checkbox";
         taskInputElement.name = task.name;
         taskInputElement.id = taskId;
+        taskInputElement.checked = task.done;
+        taskInputElement.addEventListener("click", function () {
+            task.done = !task.done;
+        });
         var taskLabelElement = document.createElement("label");
         taskLabelElement.setAttribute("for", taskId);
         taskLabelElement.innerText = task.name;
@@ -42,12 +46,13 @@ var renderTasks = function () {
         tasksContainer.appendChild(taskElement);
     });
 };
-var addTask = function (taskName) {
-    tasks.push({ name: taskName, done: false });
+var addTask = function (task) {
+    tasks.push(task);
 };
 addTaskButtonElement.addEventListener("click", function (event) {
     event.preventDefault();
-    addTask(taskInputElement.value);
+    addTask({ name: taskInputElement.value, done: false });
     renderTasks();
 });
+addTask({ name: "asasdasdasd", done: true });
 renderTasks();
