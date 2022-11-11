@@ -39,7 +39,11 @@ h1 {
   margin-bottom: 20px;
 }
 
-label {
+.tasks {
+  list-style: none;
+}
+
+.taskName {
   font-size: 20px;
   font-weight: bold;
 }
