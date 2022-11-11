@@ -79,3 +79,16 @@ button:hover {
 h2 {
   text-align: center;
 }
+
+.gym {
+  color: darkblue;
+  list-style: circle;
+}
+
+.hobby {
+  color: darkgoldenrod;
+}
+
+.work {
+  text-decoration: underline;
+}
