@@ -1,4 +1,9 @@
-const renderTasks = () => {
+import { Task } from "../types/types";
+
+export const renderTasks = (
+  tasksContainer: HTMLUListElement,
+  tasks: Task[]
+) => {
   tasksContainer.innerText = "";
   tasks.forEach((task, index) => {
     const taskElement = document.createElement("li");

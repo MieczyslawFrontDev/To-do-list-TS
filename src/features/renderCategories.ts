@@ -1,4 +1,10 @@
-const renderCategories = () => {
+import { Category } from "../types/types";
+
+export const renderCategories = (
+  categories: Category[],
+  categoriesContainer: HTMLUListElement,
+  selectedCategory: Category
+) => {
   categories.forEach((category) => {
     const categoryElement: HTMLLIElement = document.createElement("li");
     const categoryId = `category-${category}`;

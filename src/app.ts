@@ -1,3 +1,7 @@
+import { renderCategories } from "./features/renderCategories.js";
+import { renderTasks } from "./features/renderTask.js";
+import { Category, Task } from "./types/types";
+
 const taskInputElement: HTMLInputElement = document.querySelector("#taskName");
 const addTaskButtonElement: HTMLButtonElement =
   document.querySelector(".addTask");
@@ -44,10 +48,12 @@ addTaskButtonElement.addEventListener("click", (event: Event) => {
     done: false,
     category: selectedCategory,
   });
-  renderTasks();
+  renderTasks(tasksContainer, tasks);
 });
 
 addTask({ name: "asasdasdasd", done: true, category: "general" });
 
-renderCategories();
-renderTasks();
+renderCategories(categories, categoriesContainer, selectedCategory);
+renderTasks(tasksContainer, tasks);
+
+console.log("sadad");
