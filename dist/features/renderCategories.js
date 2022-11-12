@@ -1,4 +1,4 @@
-var renderCategories = function () {
+export var renderCategories = function (categories, categoriesContainer, selectedCategory) {
     categories.forEach(function (category) {
         var categoryElement = document.createElement("li");
         var categoryId = "category-".concat(category);
