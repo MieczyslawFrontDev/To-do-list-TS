@@ -1,3 +1,4 @@
+import { Category } from "../types/types.js";
 export var renderCategories = function (categories, categoriesContainer, updateSelectedCategory) {
     categories.forEach(function (category) {
         var categoryElement = document.createElement("li");
@@ -9,6 +10,7 @@ export var renderCategories = function (categories, categoriesContainer, updateS
         categoryRadioElement.id = categoryId;
         categoryRadioElement.addEventListener("change", function () {
             updateSelectedCategory(category);
+            handleCategoryChangeEffect(category);
         });
         var categoryLabelElement = document.createElement("label");
         categoryLabelElement.setAttribute("for", "category-".concat(category));
@@ -17,4 +19,22 @@ export var renderCategories = function (categories, categoriesContainer, updateS
         categoryElement.appendChild(categoryLabelElement);
         categoriesContainer.appendChild(categoryElement);
     });
+};
+export var handleCategoryChangeEffect = function (category) {
+    if (category === Category.General) {
+        alert("Kategoria general");
+    }
+    else if (category === Category.Gym) {
+        alert("Kategoria gym");
+    }
+    else if (category === Category.Hobby) {
+        alert("Kategoria hobby");
+    }
+    else if (category === Category.Work) {
+        alert("Kategoria work");
+    }
+    else {
+        var never = category;
+        alert("Obsługa typu never");
+    }
 };

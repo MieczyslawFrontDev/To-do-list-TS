@@ -1,31 +1,37 @@
 import { renderCategories } from "./features/renderCategories.js";
 import { renderTasks } from "./features/renderTask.js";
+import { Category } from "./types/types.js";
 var taskInputElement = document.querySelector("#taskName");
 var addTaskButtonElement = document.querySelector(".addTask");
 var tasksContainer = document.querySelector(".tasks");
 var categoriesContainer = document.querySelector(".categories");
-var categories = ["general", "work", "gym", "hobby"];
+var categories = [
+    Category.General,
+    Category.Gym,
+    Category.Hobby,
+    Category.Work,
+];
 var selectedCategory;
 var tasks = [
     {
         name: "Wyjść z psem na spacer",
         done: false,
-        category: "general",
+        category: Category.General,
     },
     {
         name: "Zrobić trening",
         done: false,
-        category: "gym",
+        category: Category.Gym,
     },
     {
         name: "Nauczyć się TS",
         done: false,
-        category: "hobby",
+        category: Category.Hobby,
     },
     {
         name: "Znaleźć pracę",
         done: false,
-        category: "work",
+        category: Category.Work,
     },
 ];
 var addTask = function (task) {
@@ -43,6 +49,5 @@ addTaskButtonElement.addEventListener("click", function (event) {
     });
     renderTasks(tasksContainer, tasks);
 });
-addTask({ name: "asasdasdasd", done: true, category: "general" });
 renderCategories(categories, categoriesContainer, updateSelectedCategory);
 renderTasks(tasksContainer, tasks);

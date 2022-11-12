@@ -1,4 +1,4 @@
-import { Category } from "../types/types";
+import { Category } from "../types/types.js";
 
 export const renderCategories = (
   categories: Category[],
@@ -18,6 +18,8 @@ export const renderCategories = (
 
     categoryRadioElement.addEventListener("change", () => {
       updateSelectedCategory(category);
+
+      handleCategoryChangeEffect(category);
     });
 
     const categoryLabelElement: HTMLLabelElement =
@@ -29,4 +31,19 @@ export const renderCategories = (
     categoryElement.appendChild(categoryLabelElement);
     categoriesContainer.appendChild(categoryElement);
   });
+};
+
+export const handleCategoryChangeEffect = (category: Category) => {
+  if (category === Category.General) {
+    alert("Kategoria general");
+  } else if (category === Category.Gym) {
+    alert("Kategoria gym");
+  } else if (category === Category.Hobby) {
+    alert("Kategoria hobby");
+  } else if (category === Category.Work) {
+    alert("Kategoria work");
+  } else {
+    const never: never = category;
+    alert("Obsługa typu never");
+  }
 };
