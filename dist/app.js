@@ -1,3 +1,4 @@
+import { TaskClass } from "./class/class.js";
 import { renderCategories } from "./features/renderCategories.js";
 import { renderTasks } from "./features/renderTask.js";
 import { Category } from "./types/types.js";
@@ -13,26 +14,10 @@ var categories = [
 ];
 var selectedCategory;
 var tasks = [
-    {
-        name: "Wyjść z psem na spacer",
-        done: false,
-        category: Category.General,
-    },
-    {
-        name: "Zrobić trening",
-        done: false,
-        category: Category.Gym,
-    },
-    {
-        name: "Nauczyć się TS",
-        done: false,
-        category: Category.Hobby,
-    },
-    {
-        name: "Znaleźć pracę",
-        done: false,
-        category: Category.Work,
-    },
+    new TaskClass("Wyjść z psem na spacer", false, Category.General),
+    new TaskClass("Zrobić trening", false, Category.Gym),
+    new TaskClass("Nauczyć się TS", false, Category.Hobby),
+    new TaskClass("Znaleźć pracę", false, Category.Work),
 ];
 var addTask = function (task) {
     tasks.push(task);
@@ -42,11 +27,9 @@ var updateSelectedCategory = function (newCategory) {
 };
 addTaskButtonElement.addEventListener("click", function (event) {
     event.preventDefault();
-    addTask({
-        name: taskInputElement.value,
-        done: false,
-        category: selectedCategory,
-    });
+    var newTask = new TaskClass(taskInputElement.value, false, selectedCategory);
+    addTask(newTask);
+    newTask.logCreationDate("!!!");
     renderTasks(tasksContainer, tasks);
 });
 renderCategories(categories, categoriesContainer, updateSelectedCategory);

@@ -1,8 +1,8 @@
-import { Task } from "../types/types";
+import { TaskClass } from "../class/class";
 
 export const renderTasks = (
   tasksContainer: HTMLUListElement,
-  tasks: Task[]
+  tasks: TaskClass[]
 ) => {
   tasksContainer.innerText = "";
   tasks.forEach((task, index) => {

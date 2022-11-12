@@ -1,8 +1,8 @@
-export interface Task {
-  name: string;
-  done: boolean;
-  category?: Category;
-}
+// export interface Task {
+//   name: string;
+//   done: boolean;
+//   category?: Category;
+// }
 
 export enum Category {
   General = "general",
