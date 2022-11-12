@@ -31,6 +31,9 @@ var tasks = [
 var addTask = function (task) {
     tasks.push(task);
 };
+var updateSelectedCategory = function (newCategory) {
+    selectedCategory = newCategory;
+};
 addTaskButtonElement.addEventListener("click", function (event) {
     event.preventDefault();
     addTask({
@@ -41,5 +44,5 @@ addTaskButtonElement.addEventListener("click", function (event) {
     renderTasks(tasksContainer, tasks);
 });
 addTask({ name: "asasdasdasd", done: true, category: "general" });
-renderCategories(categories, categoriesContainer, selectedCategory);
+renderCategories(categories, categoriesContainer, updateSelectedCategory);
 renderTasks(tasksContainer, tasks);

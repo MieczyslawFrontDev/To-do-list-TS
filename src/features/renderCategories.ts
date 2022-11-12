@@ -3,7 +3,7 @@ import { Category } from "../types/types";
 export const renderCategories = (
   categories: Category[],
   categoriesContainer: HTMLUListElement,
-  selectedCategory: Category
+  updateSelectedCategory: (category: Category) => void
 ) => {
   categories.forEach((category) => {
     const categoryElement: HTMLLIElement = document.createElement("li");
@@ -17,7 +17,7 @@ export const renderCategories = (
     categoryRadioElement.id = categoryId;
 
     categoryRadioElement.addEventListener("change", () => {
-      selectedCategory = category;
+      updateSelectedCategory(category);
     });
 
     const categoryLabelElement: HTMLLabelElement =

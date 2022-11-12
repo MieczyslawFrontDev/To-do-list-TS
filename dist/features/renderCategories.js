@@ -1,4 +1,4 @@
-export var renderCategories = function (categories, categoriesContainer, selectedCategory) {
+export var renderCategories = function (categories, categoriesContainer, updateSelectedCategory) {
     categories.forEach(function (category) {
         var categoryElement = document.createElement("li");
         var categoryId = "category-".concat(category);
@@ -8,7 +8,7 @@ export var renderCategories = function (categories, categoriesContainer, selecte
         categoryRadioElement.value = category;
         categoryRadioElement.id = categoryId;
         categoryRadioElement.addEventListener("change", function () {
-            selectedCategory = category;
+            updateSelectedCategory(category);
         });
         var categoryLabelElement = document.createElement("label");
         categoryLabelElement.setAttribute("for", "category-".concat(category));
