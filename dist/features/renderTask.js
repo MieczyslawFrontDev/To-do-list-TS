@@ -1,4 +1,4 @@
-var renderTasks = function () {
+export var renderTasks = function (tasksContainer, tasks) {
     tasksContainer.innerText = "";
     tasks.forEach(function (task, index) {
         var taskElement = document.createElement("li");
