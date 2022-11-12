@@ -55,5 +55,3 @@ addTask({ name: "asasdasdasd", done: true, category: "general" });
 
 renderCategories(categories, categoriesContainer, selectedCategory);
 renderTasks(tasksContainer, tasks);
-
-console.log("sadad");
