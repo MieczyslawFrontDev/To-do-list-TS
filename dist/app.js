@@ -6,6 +6,7 @@ var taskInputElement = document.querySelector("#taskName");
 var addTaskButtonElement = document.querySelector(".addTask");
 var tasksContainer = document.querySelector(".tasks");
 var categoriesContainer = document.querySelector(".categories");
+var message = document.querySelector(".message");
 var categories = [
     Category.General,
     Category.Gym,
@@ -20,7 +21,13 @@ var tasks = [
     new TaskClass("Znaleźć pracę", false, Category.Work),
 ];
 var addTask = function (task) {
+    if (!taskInputElement.value) {
+        message.style.display = "flex";
+        return;
+    }
     tasks.push(task);
+    taskInputElement.value = "";
+    message.style.display = "none";
 };
 var updateSelectedCategory = function (newCategory) {
     selectedCategory = newCategory;
@@ -29,7 +36,6 @@ addTaskButtonElement.addEventListener("click", function (event) {
     event.preventDefault();
     var newTask = new TaskClass(taskInputElement.value, false, selectedCategory);
     addTask(newTask);
-    newTask.logCreationDate("!!!");
     renderTasks(tasksContainer, tasks);
 });
 renderCategories(categories, categoriesContainer, updateSelectedCategory);

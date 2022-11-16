@@ -12,7 +12,8 @@ export const renderTasks = (
     }
     const taskId = `task-${index}`;
 
-    const taskCheckboxElement = document.createElement("input");
+    const taskCheckboxElement: HTMLInputElement =
+      document.createElement("input");
     taskCheckboxElement.type = "checkbox";
     taskCheckboxElement.name = task.name;
     taskCheckboxElement.id = taskId;
@@ -21,12 +22,17 @@ export const renderTasks = (
       task.done = !task.done;
     });
 
-    const taskLabelElement = document.createElement("label");
+    const taskLabelElement: HTMLLabelElement = document.createElement("label");
     taskLabelElement.setAttribute("for", taskId);
     taskLabelElement.innerText = task.name;
 
+    const taskCreationDateElement: HTMLParagraphElement =
+      document.createElement("p");
+    taskCreationDateElement.innerText = task.createdAt;
+
     taskElement.appendChild(taskCheckboxElement);
     taskElement.appendChild(taskLabelElement);
+    taskElement.appendChild(taskCreationDateElement);
     tasksContainer.appendChild(taskElement);
   });
 };

@@ -9,6 +9,7 @@ const addTaskButtonElement: HTMLButtonElement =
 const tasksContainer: HTMLUListElement = document.querySelector(".tasks");
 const categoriesContainer: HTMLUListElement =
   document.querySelector(".categories");
+const message: HTMLParagraphElement = document.querySelector(".message");
 
 const categories: Category[] = [
   Category.General,
@@ -27,7 +28,13 @@ const tasks: TaskClass[] = [
 ];
 
 const addTask = (task: TaskClass) => {
+  if (!taskInputElement.value) {
+    message.style.display = "flex";
+    return;
+  }
   tasks.push(task);
+  taskInputElement.value = "";
+  message.style.display = "none";
 };
 
 const updateSelectedCategory = (newCategory: Category) => {
@@ -44,7 +51,6 @@ addTaskButtonElement.addEventListener("click", (event: Event) => {
   );
 
   addTask(newTask);
-  newTask.logCreationDate("!!!");
 
   renderTasks(tasksContainer, tasks);
 });

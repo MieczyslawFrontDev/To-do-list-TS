@@ -17,8 +17,11 @@ export var renderTasks = function (tasksContainer, tasks) {
         var taskLabelElement = document.createElement("label");
         taskLabelElement.setAttribute("for", taskId);
         taskLabelElement.innerText = task.name;
+        var taskCreationDateElement = document.createElement("p");
+        taskCreationDateElement.innerText = task.createdAt;
         taskElement.appendChild(taskCheckboxElement);
         taskElement.appendChild(taskLabelElement);
+        taskElement.appendChild(taskCreationDateElement);
         tasksContainer.appendChild(taskElement);
     });
 };
