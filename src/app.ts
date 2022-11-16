@@ -10,6 +10,8 @@ const tasksContainer: HTMLUListElement = document.querySelector(".tasks");
 const categoriesContainer: HTMLUListElement =
   document.querySelector(".categories");
 const message: HTMLParagraphElement = document.querySelector(".message");
+const removeTasksButton: HTMLButtonElement =
+  document.querySelector(".removeDone");
 
 const categories: Category[] = [
   Category.General,
@@ -20,7 +22,7 @@ const categories: Category[] = [
 
 let selectedCategory: Category;
 
-const tasks: TaskClass[] = [
+let tasks: TaskClass[] = [
   new TaskClass("Wyjść z psem na spacer", false, Category.General),
   new TaskClass("Zrobić trening", false, Category.Gym),
   new TaskClass("Nauczyć się TS", false, Category.Hobby),
@@ -51,7 +53,17 @@ addTaskButtonElement.addEventListener("click", (event: Event) => {
   );
 
   addTask(newTask);
+  renderTasks(tasksContainer, tasks);
+});
 
+const removeDoneTasks = () => {
+  tasks = tasks.filter((task: TaskClass) => !task.done);
+};
+
+removeTasksButton.addEventListener("click", (event: Event) => {
+  event.preventDefault();
+
+  removeDoneTasks();
   renderTasks(tasksContainer, tasks);
 });
 
